@@ -1,0 +1,70 @@
+:root {
+  /* ---- Color: surface ---- */
+  --color-void: #05060a;
+  --color-void-elevated: #0b0d15;
+  --color-void-raised: #12141f;
+  --color-hairline: #22242f;
+
+  /* ---- Color: text ---- */
+  --color-ink: #f4f0e6;
+  --color-ink-muted: #a6a5ad;
+  --color-ink-faint: #82828e;
+
+  /* ---- Color: accent ---- */
+  --color-gold: #cf9d56;
+  --color-gold-soft: #e3c084;
+  --color-purple: #8d7fce;
+  --color-cyan: #6fb3ac;
+  --color-blue: #6c86c4;
+  --color-orange: #c17f52;
+
+  /* ---- Color: semantic ---- */
+  --color-success: var(--color-cyan);
+
+  /* ---- Typography ---- */
+  --font-display: 'Fraunces', 'Iowan Old Style', ui-serif, Georgia, serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* ---- Motion ---- */
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 500ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Radii ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  /* ---- Glow ---- */
+  --glow-gold: 0 0 40px rgba(207, 157, 86, 0.28);
+  --glow-purple: 0 0 40px rgba(141, 127, 206, 0.28);
+  --glow-cyan: 0 0 40px rgba(111, 179, 172, 0.28);
+  --glow-blue: 0 0 40px rgba(108, 134, 196, 0.28);
+  --glow-orange: 0 0 40px rgba(193, 127, 82, 0.28);
+}
+
+@theme inline {
+  --color-void: var(--color-void);
+  --color-void-elevated: var(--color-void-elevated);
+  --color-void-raised: var(--color-void-raised);
+  --color-hairline: var(--color-hairline);
+
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-ink-faint: var(--color-ink-faint);
+
+  --color-gold: var(--color-gold);
+  --color-gold-soft: var(--color-gold-soft);
+  --color-purple: var(--color-purple);
+  --color-cyan: var(--color-cyan);
+  --color-blue: var(--color-blue);
+  --color-orange: var(--color-orange);
+  --color-success: var(--color-success);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}

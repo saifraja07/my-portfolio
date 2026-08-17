@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://saifaliraja.dev/</loc></url>
+  <url><loc>https://saifaliraja.dev/about</loc></url>
+  <url><loc>https://saifaliraja.dev/projects</loc></url>
+  <!-- One <url> per projects.ts entry. Add a line here when a new project ships;
+       revisit with a build-time generator if the project list grows much further. -->
+  <url><loc>https://saifaliraja.dev/projects/browseros</loc></url>
+  <url><loc>https://saifaliraja.dev/projects/haadi-cloud</loc></url>
+  <url><loc>https://saifaliraja.dev/projects/purane-gaane</loc></url>
+  <url><loc>https://saifaliraja.dev/experience</loc></url>
+  <url><loc>https://saifaliraja.dev/skills</loc></url>
+  <url><loc>https://saifaliraja.dev/writing</loc></url>
+  <url><loc>https://saifaliraja.dev/contact</loc></url>
+  <url><loc>https://saifaliraja.dev/resume</loc></url>
+  <url><loc>https://saifaliraja.dev/recruiter</loc></url>
+</urlset>
