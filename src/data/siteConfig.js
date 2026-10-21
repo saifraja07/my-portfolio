@@ -13,7 +13,7 @@ export const siteConfig = {
   // github / linkedin: full profile URL. email: plain address (no "mailto:").
   social: {
     // Add your Instagram profile URL when ready, e.g. https://www.instagram.com/your-handle/
-    instagram: 'htts://instagram.com/saif__a__r',
+    instagram: 'https://www.instagram.com/saif__a__r',
     github: 'https://github.com/saifraja07',
     linkedin: 'https://www.linkedin.com/in/saif-raja-a89536312',
     email: 'saifaliraja9852@gmail.com',
