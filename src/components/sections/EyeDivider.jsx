@@ -85,7 +85,7 @@ export default function EyeDivider() {
   }, [])
 
   return (
-    <div className="mx-auto w-full max-w-212.5 px-5 sm:px-8" role="presentation" aria-hidden="true">
+    <div className="mx-auto w-full max-w-250" role="presentation" aria-hidden="true">
       <div className="flex h-8 items-center">
         <div className="h-px flex-1 bg-line" />
         <svg
