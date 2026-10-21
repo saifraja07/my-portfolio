@@ -571,3 +571,94 @@ a.footer-social-link:hover {
   .footer-social-link { transition: none; }
   a.footer-social-link:hover { transform: none; }
 }
+
+/* ---------- Compact navbar + animated profile drawer ---------- */
+.site-navbar { border-bottom: 0; }
+.site-navbar-inner { height: 3.75rem; }
+.site-navbar-actions { gap: 0.55rem; }
+.navbar-brand { display: inline-flex; align-items: center; min-height: 2.4rem; border-radius: 0.45rem; padding: 0.2rem 0.45rem; transition: background-color 160ms ease, color 160ms ease; }
+.navbar-brand-name { color: var(--fg); font-family: var(--font-mono); font-size: 1.02rem; font-weight: 700; letter-spacing: -0.055em; }
+.navbar-brand-name span { color: var(--accent); }
+.navbar-brand:hover { background: color-mix(in srgb, var(--fg) 7%, transparent); }
+.navbar-github,
+.navbar-icon-button {
+  display: inline-flex;
+  min-height: 2.35rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  color: var(--fg);
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.navbar-github { padding: 0 0.75rem; font-size: 0.78rem; }
+.navbar-github:hover,
+.navbar-icon-button:hover { border-color: var(--border); background: color-mix(in srgb, var(--fg) 9%, transparent); }
+.navbar-github:hover { transform: translateY(-1px); }
+.navbar-external { color: var(--muted); }
+.navbar-icon-button { width: 2.4rem; padding: 0; }
+.site-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgb(0 0 0 / 48%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 240ms ease, visibility 240ms ease;
+  backdrop-filter: blur(2px);
+}
+.site-menu-backdrop.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.site-menu-drawer {
+  position: fixed;
+  z-index: 61;
+  inset-block: 0;
+  right: 0;
+  display: flex;
+  width: min(100%, 320px);
+  flex-direction: column;
+  overflow-y: auto;
+  border-left: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  transform: translateX(102%);
+  visibility: hidden;
+  transition: transform 280ms cubic-bezier(.2,.75,.25,1), visibility 280ms ease;
+  overscroll-behavior: contain;
+  box-shadow: -18px 0 48px rgb(0 0 0 / 0%);
+}
+.site-menu-drawer.is-open { transform: translateX(0); visibility: visible; box-shadow: -18px 0 48px rgb(0 0 0 / 18%); }
+.site-menu-top { display: flex; min-height: 3.45rem; align-items: center; justify-content: space-between; padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); }
+.site-menu-eyebrow { margin: 0; color: var(--muted); font-size: 0.58rem; letter-spacing: 0.19em; line-height: 1.4; }
+.site-menu-close { display: inline-flex; width: 1.85rem; height: 1.85rem; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 0.35rem; color: var(--fg); transition: border-color 150ms ease, color 150ms ease; }
+.site-menu-close:hover { border-color: var(--border); color: var(--fg); background: color-mix(in srgb, var(--fg) 9%, transparent); }
+.site-menu-profile, .site-menu-appearance, .site-menu-explore, .site-menu-connect { padding: 1rem; border-bottom: 1px solid var(--border); }
+.site-menu-profile-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.8rem; }
+.site-menu-avatar { display: grid; width: 2.65rem; height: 2.65rem; flex: 0 0 auto; place-items: center; border: 1px solid var(--border); border-radius: 50%; background: color-mix(in srgb, var(--fg) 3%, transparent); color: var(--fg); font-family: var(--font-mono); font-size: 0.8rem; }
+.site-menu-profile-copy { display: flex; min-width: 0; flex-direction: column; line-height: 1.55; }
+.site-menu-profile-copy strong { font-family: inherit; font-size: 0.78rem; font-weight: 600; }
+.site-menu-role { color: var(--accent); font-size: 0.62rem; }
+.site-menu-bio { color: var(--muted); font-size: 0.58rem; }
+.site-menu-theme-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: 0.8rem; }
+.site-menu-theme-option { display: inline-flex; min-height: 2.35rem; align-items: center; justify-content: center; gap: 0.45rem; border: 1px solid var(--border); border-radius: 0.35rem; color: var(--muted); font-size: 0.68rem; transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease; }
+.site-menu-theme-option:hover { color: var(--fg); border-color: var(--border); background: color-mix(in srgb, var(--fg) 7%, transparent); }
+.site-menu-theme-option.is-selected { border-color: var(--accent); color: var(--fg); background: color-mix(in srgb, var(--accent) 5%, transparent); }
+.site-menu-explore ul, .site-menu-connect ul { display: flex; flex-direction: column; gap: 0.1rem; margin: 0.65rem 0 0; padding: 0; list-style: none; }
+.site-menu-explore a { display: flex; min-height: 1.8rem; align-items: center; color: var(--muted); font-size: 0.7rem; transition: color 140ms ease, padding-left 140ms ease; }
+.site-menu-explore a:hover, .site-menu-explore a.is-active { color: var(--fg); }
+.site-menu-explore a { padding-inline: 0.45rem; border-radius: 0.3rem; }
+.site-menu-explore a:hover { padding-left: 0.7rem; background: color-mix(in srgb, var(--fg) 7%, transparent); }
+.site-menu-explore a.is-active::before { width: 0.25rem; height: 0.25rem; margin-right: 0.5rem; border-radius: 50%; background: var(--accent); content: ''; }
+.site-menu-connect a, .site-menu-social-unavailable { display: flex; min-height: 1.8rem; align-items: center; gap: 0.6rem; color: var(--muted); font-size: 0.7rem; transition: color 140ms ease; }
+.site-menu-connect a { padding-inline: 0.45rem; border-radius: 0.3rem; }
+.site-menu-connect a:hover { color: var(--fg); background: color-mix(in srgb, var(--fg) 7%, transparent); }
+.site-menu-social-unavailable { opacity: 0.55; }
+.site-menu-connect svg { flex: 0 0 auto; }
+@media (width >= 48rem) {
+  .site-menu-drawer { width: 320px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar-brand, .navbar-github, .navbar-icon-button, .site-menu-backdrop, .site-menu-drawer, .site-menu-close, .site-menu-theme-option, .site-menu-explore a, .site-menu-connect a { transition: none; }
+  .navbar-github:hover, .site-menu-explore a:hover { transform: none; padding-left: 0.45rem; }
+}
