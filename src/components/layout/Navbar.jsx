@@ -7,13 +7,6 @@ import { socialLinks } from '../ui/socialLinks'
 import { GithubIcon } from '../ui/BrandIcons'
 
 const navIds = siteConfig.navLinks.map((link) => link.id)
-const exploreLinks = [
-  { id: 'home', label: 'Overview', href: '#home' },
-  { id: 'projects', label: 'Projects', href: '#projects' },
-  { id: 'about', label: 'About', href: '#about' },
-  { id: 'skills', label: 'Stack', href: '#skills' },
-  { id: 'contact', label: 'Contact', href: '#contact' },
-]
 
 export default function Navbar({ theme, onToggleTheme, isProjectPage = false }) {
   const [activeId, pinSection] = useActiveSection(navIds)
@@ -124,7 +117,7 @@ export default function Navbar({ theme, onToggleTheme, isProjectPage = false }) 
         <nav className="site-menu-explore" aria-label="Explore">
           <p className="site-menu-eyebrow">EXPLORE</p>
           <ul>
-            {exploreLinks.map((link) => {
+            {siteConfig.navLinks.map((link) => {
               const active = link.id === activeId
               return (
                 <li key={link.id}>

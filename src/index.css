@@ -196,7 +196,7 @@
 .project-preview-storageapp { background-color: #111511; }
 .project-preview-observability-stack { background-color: #141116; }
 .project-detail-page { padding-top: clamp(1.5rem, 4vw, 3rem); }
-.project-detail-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; min-height: 2.75rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+.project-detail-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; min-height: 2.75rem;   }
 .project-detail-crumb-separator { color: var(--border); font-size: .8rem; }
 .project-detail-header {
   display: flex;
@@ -209,7 +209,7 @@
 }
 .detail-back { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--muted); font-size: 0.85rem; transition: color 160ms ease; }
 .detail-back:hover { color: var(--fg); }
-.project-detail-intro { max-width: 900px; padding-block: clamp(2.75rem, 7vw, 5.5rem) 2.5rem; }
+.project-detail-intro { max-width: 900px; padding-block: clamp(1.75rem, 2vw, 5.5rem) 2.5rem; }
 .detail-action, .detail-action-primary {
   display: inline-flex;
   min-height: 2.7rem;

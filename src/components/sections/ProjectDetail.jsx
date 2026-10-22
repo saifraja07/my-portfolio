@@ -23,9 +23,8 @@ export default function ProjectDetail({ project }) {
     return (
       <div className="shell project-detail-page">
         <Link to="/#projects" className="detail-back"><ArrowLeft size={16} /> Back to projects</Link>
-        <p className="mt-16 text-sm text-muted">That project could not be found.</p>
-        <h1 className="mt-2 text-3xl font-semibold">Project not found</h1>
-        <Link to="/#projects" className="mt-6 inline-flex text-sm text-accent hover:underline">Browse all projects →</Link>
+        <p className="mt-16 text-sm text-center text-muted">something went wrong.</p>
+        <h1 className="mt-4 mb-12 text-center text-3xl font-semibold">Project not found</h1>
       </div>
     )
   }
@@ -34,8 +33,8 @@ export default function ProjectDetail({ project }) {
     <div className="shell project-detail-page">
       <nav className="project-detail-breadcrumb" aria-label="Breadcrumb">
         <Link to="/#projects" className="detail-back"><ArrowLeft size={16} aria-hidden="true" /> Back to projects</Link>
-        <span className="project-detail-crumb-separator" aria-hidden="true">/</span>
-        <span className="text-xs text-muted">{project.title}</span>
+        {/* <span className="project-detail-crumb-separator" aria-hidden="true">/</span> */}
+        {/* <span className="text-xs text-muted">{project.title}</span> */}
       </nav>
 
       <section className="project-detail-intro">
@@ -73,11 +72,6 @@ export default function ProjectDetail({ project }) {
           {project.challenges ? <div><p className="detail-label">04 / ENGINEERING NOTES</p><p className="mt-3 text-sm leading-relaxed text-muted">{project.challenges}</p></div> : null}
         </aside>
       </div>
-
-      {/* <footer className="project-detail-bottom">
-        <Link to="/#projects" className="detail-back"><ArrowLeft size={16} aria-hidden="true" /> Back to all projects</Link>
-        <Link to="/" className="text-sm text-muted transition-colors hover:text-fg">Back to portfolio home ↗</Link>
-      </footer> */}
     </div>
   )
 }
