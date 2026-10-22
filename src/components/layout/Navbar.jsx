@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { siteConfig } from '../../data/siteConfig'
@@ -14,7 +15,7 @@ const exploreLinks = [
   { id: 'contact', label: 'Contact', href: '#contact' },
 ]
 
-export default function Navbar({ theme, onToggleTheme }) {
+export default function Navbar({ theme, onToggleTheme, isProjectPage = false }) {
   const [activeId, pinSection] = useActiveSection(navIds)
   const [menuOpen, setMenuOpen] = useState(false)
   const isLight = theme === 'light'
@@ -43,9 +44,9 @@ export default function Navbar({ theme, onToggleTheme }) {
       <header className="site-navbar sticky top-0 z-50 bg-bg">
         <div className="shell">
           <div className="site-navbar-inner flex h-16 items-center justify-between border-b border-line">
-            <a className="navbar-brand" href="/" onClick={() => selectLink('home')} aria-label="saif.dev home">
+            <Link className="navbar-brand" to="/" onClick={() => selectLink('home')} aria-label="saif.dev home">
               <span className="navbar-brand-name">saif<span>.dev</span></span>
-            </a>
+            </Link>
             <div className="site-navbar-actions flex items-center gap-2">
               <a
                 href={siteConfig.social.github || 'https://github.com'}
@@ -127,9 +128,9 @@ export default function Navbar({ theme, onToggleTheme }) {
               const active = link.id === activeId
               return (
                 <li key={link.id}>
-                  <a href={link.href} onClick={() => selectLink(link.id)} aria-current={active ? 'location' : undefined} className={active ? 'is-active' : ''}>
+                  <Link to={isProjectPage ? `/${link.href}` : link.href} onClick={() => selectLink(link.id)} aria-current={!isProjectPage && active ? 'location' : undefined} className={!isProjectPage && active ? 'is-active' : ''}>
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               )
             })}

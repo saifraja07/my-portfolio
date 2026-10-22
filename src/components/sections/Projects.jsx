@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import GithubMark from '../ui/GithubMark'
 import { projects } from '../../data/projects'
 import { siteConfig } from '../../data/siteConfig'
@@ -51,13 +52,13 @@ export default function Projects() {
         <div className="projects-showcase">
           {projects.map((project, index) => (
             <article key={project.id} className={`project-showcase-row ${index % 2 ? 'project-showcase-row-reverse' : ''}`}>
-              <a href={`/projects/${project.id}`} className="project-showcase-preview" aria-label={`View ${project.title} project page`}>
+              <Link to={`/projects/${project.id}`} className="project-showcase-preview" aria-label={`View ${project.title} project page`}>
                 <div className="project-showcase-frame">
                   <ProjectPreview project={project} />
                   <span className="project-showcase-open"><ArrowUpRight size={19} aria-hidden="true" /></span>
                   <span className="project-showcase-hint">EXPLORE PROJECT <ArrowUpRight size={12} aria-hidden="true" /></span>
                 </div>
-              </a>
+              </Link>
 
               <div className="project-showcase-info">
                 <span className="project-showcase-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>

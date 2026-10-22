@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Hero from './components/sections/Hero'
@@ -10,32 +12,43 @@ import ProjectDetail from './components/sections/ProjectDetail'
 import { projects } from './data/projects'
 import { useTheme } from './hooks/useTheme'
 
-export default function App() {
-  const { theme, toggleTheme } = useTheme()
-  const projectMatch = window.location.pathname.match(/^\/projects\/([^/]+)\/?$/)
+function RouteContent({ theme, toggleTheme }) {
+  const location = useLocation()
+  const isProjectPage = location.pathname.startsWith('/projects/')
+  const projectId = isProjectPage ? decodeURIComponent(location.pathname.split('/')[2] || '') : ''
+  const project = projects.find((item) => item.id === projectId)
 
-  if (projectMatch) {
-    const projectId = decodeURIComponent(projectMatch[1])
-    const project = projects.find((item) => item.id === projectId)
-    return <ProjectDetail project={project} theme={theme} onToggleTheme={toggleTheme} />
-  }
+  useEffect(() => {
+    if (location.hash) {
+      requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView())
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+  }, [location.pathname, location.hash])
 
   return (
     <>
-      <a href="#main" className="skip-link">
-        Skip to content
-      </a>
-      <div id="home" />
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
-      <main id="main">
-        <Hero />
-        <EyeDivider />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
+      <a href="#main" className="skip-link">Skip to content</a>
+      <Navbar theme={theme} onToggleTheme={toggleTheme} isProjectPage={isProjectPage} />
+      {isProjectPage ? (
+        <main id="main"><ProjectDetail project={project} /></main>
+      ) : (
+        <main id="main">
+          <div id="home" />
+          <Hero />
+          <EyeDivider />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+        </main>
+      )}
       <Footer />
     </>
   )
+}
+
+export default function App() {
+  const { theme, toggleTheme } = useTheme()
+  return <Routes><Route path="*" element={<RouteContent theme={theme} toggleTheme={toggleTheme} />} /></Routes>
 }

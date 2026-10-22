@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import GithubMark from '../ui/GithubMark'
 
 function DetailPreview({ project }) {
@@ -17,31 +18,25 @@ function DetailPreview({ project }) {
   )
 }
 
-export default function ProjectDetail({ project, theme, onToggleTheme }) {
+export default function ProjectDetail({ project }) {
   if (!project) {
     return (
-      <main className="shell project-detail-page">
-        <a href="/#projects" className="detail-back"><ArrowLeft size={16} /> Back to projects</a>
+      <div className="shell project-detail-page">
+        <Link to="/#projects" className="detail-back"><ArrowLeft size={16} /> Back to projects</Link>
         <p className="mt-16 text-sm text-muted">That project could not be found.</p>
         <h1 className="mt-2 text-3xl font-semibold">Project not found</h1>
-        <a href="/#projects" className="mt-6 inline-flex text-sm text-accent hover:underline">Browse all projects →</a>
-      </main>
+        <Link to="/#projects" className="mt-6 inline-flex text-sm text-accent hover:underline">Browse all projects →</Link>
+      </div>
     )
   }
 
   return (
-    <main className="shell project-detail-page">
-      <header className="project-detail-header">
-        <a href="/#projects" className="detail-back"><ArrowLeft size={16} aria-hidden="true" /> Back to projects</a>
-        <div className="flex items-center gap-4 text-xs text-muted">
-          <a href="/" className="transition-colors hover:text-fg">saif.dev</a>
-          <span aria-hidden="true">/</span>
-          <span>Projects</span>
-          <button type="button" onClick={onToggleTheme} className="ml-1 rounded-full border border-line px-3 py-1.5 transition-colors hover:text-fg" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
-            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-          </button>
-        </div>
-      </header>
+    <div className="shell project-detail-page">
+      <nav className="project-detail-breadcrumb" aria-label="Breadcrumb">
+        <Link to="/#projects" className="detail-back"><ArrowLeft size={16} aria-hidden="true" /> Back to projects</Link>
+        <span className="project-detail-crumb-separator" aria-hidden="true">/</span>
+        <span className="text-xs text-muted">{project.title}</span>
+      </nav>
 
       <section className="project-detail-intro">
         <p className="text-xs tracking-[0.18em] text-muted">PROJECT / {project.id.toUpperCase()}</p>
@@ -79,10 +74,10 @@ export default function ProjectDetail({ project, theme, onToggleTheme }) {
         </aside>
       </div>
 
-      <footer className="project-detail-bottom">
-        <a href="/#projects" className="detail-back"><ArrowLeft size={16} aria-hidden="true" /> Back to all projects</a>
-        <a href="/" className="text-sm text-muted transition-colors hover:text-fg">Back to portfolio home ↗</a>
-      </footer>
-    </main>
+      {/* <footer className="project-detail-bottom">
+        <Link to="/#projects" className="detail-back"><ArrowLeft size={16} aria-hidden="true" /> Back to all projects</Link>
+        <Link to="/" className="text-sm text-muted transition-colors hover:text-fg">Back to portfolio home ↗</Link>
+      </footer> */}
+    </div>
   )
 }
