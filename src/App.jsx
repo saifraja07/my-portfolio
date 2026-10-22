@@ -28,7 +28,6 @@ function RouteContent({ theme, toggleTheme }) {
 
   return (
     <>
-      <a href="#main" className="skip-link">Skip to content</a>
       <Navbar theme={theme} onToggleTheme={toggleTheme} isProjectPage={isProjectPage} />
       {isProjectPage ? (
         <main id="main"><ProjectDetail project={project} /></main>

@@ -182,7 +182,7 @@ export default function Contact() {
       setErrors({})
       setStatus({
         type: 'success',
-        message: 'Message submitted successfully. If this is the first message, check your inbox to activate FormSubmit for this address.',
+        message: "Message submitted successfully, I'll try my best to respond as soon as possible.",
       })
     } catch {
       setStatus({
