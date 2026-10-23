@@ -9,6 +9,7 @@ import Skills from './components/sections/Skills'
 import Projects from './components/sections/Projects'
 import Contact from './components/sections/Contact'
 import ProjectDetail from './components/sections/ProjectDetail'
+import ThreeBackground from './components/background/ThreeBackground'
 import { projects } from './data/projects'
 import { useTheme } from './hooks/useTheme'
 
@@ -49,5 +50,10 @@ function RouteContent({ theme, toggleTheme }) {
 
 export default function App() {
   const { theme, toggleTheme } = useTheme()
-  return <Routes><Route path="*" element={<RouteContent theme={theme} toggleTheme={toggleTheme} />} /></Routes>
+  return (
+    <>
+      <ThreeBackground />
+      <Routes><Route path="*" element={<RouteContent theme={theme} toggleTheme={toggleTheme} />} /></Routes>
+    </>
+  )
 }

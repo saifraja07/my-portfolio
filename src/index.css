@@ -54,6 +54,12 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /* Private stacking context: the fixed particle canvas (z-index -1) sits above the body
+     background but below all page content, without touching any section's own layering. */
+  #root {
+    isolation: isolate;
+  }
+
   body {
     margin: 0;
     min-height: 100dvh;
