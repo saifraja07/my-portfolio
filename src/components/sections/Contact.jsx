@@ -49,13 +49,35 @@ function validateForm(values) {
   return errors
 }
 
+const fieldControl = [
+  'block w-full min-w-0 rounded-[.55rem] border border-line bg-[color:color-mix(in_srgb,var(--bg)_92%,var(--fg))]',
+  'px-[.9rem] py-[.8rem] text-[.83rem] leading-[1.6] text-fg outline-none',
+  '[transition:border-color_160ms_ease,box-shadow_160ms_ease,background-color_160ms_ease]',
+  'placeholder:text-muted placeholder:opacity-65',
+  'focus:border-accent focus:[box-shadow:0_0_0_3px_color-mix(in_srgb,var(--accent)_12%,transparent)]',
+  'aria-invalid:border-accent',
+].join(' ')
+
+const socialLinkBase = 'grid size-[2.45rem] place-items-center rounded-full border border-line text-muted [transition:color_160ms_ease,border-color_160ms_ease,transform_160ms_ease] hover:border-accent hover:text-accent hover:[transform:translateY(-2px)]'
+
+const statusBase = 'rounded-[.55rem] border px-[.9rem] py-[.8rem] text-[.78rem] leading-[1.6]'
+const statusStyles = {
+  success: 'border-[color:color-mix(in_srgb,#22c55e_55%,var(--border))] bg-[color:color-mix(in_srgb,#22c55e_8%,var(--bg))]',
+  error: 'border-accent bg-[color:color-mix(in_srgb,var(--accent)_7%,var(--bg))]',
+}
+
+const emailLinkClass = 'inline-flex max-w-full items-center gap-1 text-[.78rem] [overflow-wrap:anywhere] text-fg transition-colors duration-160 ease-[ease] hover:text-accent'
+const fieldClass = 'flex flex-col gap-[.45rem]'
+const labelClass = 'inline-flex items-center gap-[.45rem] text-[.72rem] text-muted [&_svg]:text-accent'
+const errorClass = 'mt-[.1rem] text-[.72rem] leading-normal text-accent'
+
 function ContactIllustration() {
   return (
     <svg
       viewBox="0 0 520 360"
       role="img"
       aria-label="Illustration of messages and a phone"
-      className="contact-illustration"
+      className="mx-auto block max-h-84 w-[min(100%,29rem)] overflow-visible max-[700px]:max-h-68"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -195,28 +217,28 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="shell contact-section">
-      <div className="contact-heading">
-        <p className="contact-eyebrow"><span className="contact-status-dot" /> CONTACT</p>
-        <h2 id="contact-title">Let&apos;s <span>connect.</span></h2>
-        <p>Have a project in mind, a question, or just want to say hello?</p>
+    <section id="contact" aria-labelledby="contact-title" className="shell pt-[clamp(2.5rem,5vw,7.5rem)] pb-[clamp(4.5rem,9vw,7rem)] max-[700px]:pt-16 max-[700px]:pb-16">
+      <div className="mx-auto mb-[clamp(2.5rem,5vw,4rem)] max-w-176 text-center max-[700px]:mb-8">
+        <p className="mb-[.8rem] inline-flex items-center gap-[.55rem] text-[.68rem] tracking-[.16em] text-muted"><span className="size-[.42rem] rounded-full bg-accent [box-shadow:0_0_0_4px_color-mix(in_srgb,var(--accent)_13%,transparent)]" /> CONTACT</p>
+        <h2 id="contact-title" className="text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] font-medium tracking-[-.065em] text-fg">Let&apos;s <span className="text-accent">connect.</span></h2>
+        <p className="mx-auto mt-4 text-[clamp(.84rem,1.5vw,.98rem)] leading-[1.8] text-muted">Have a project in mind, a question, or just want to say hello?</p>
       </div>
 
-      <div className="contact-layout">
-        <div className="contact-art-column">
+      <div className="mx-auto grid max-w-250 grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] items-center gap-[clamp(2rem,7vw,6rem)] max-[700px]:grid-cols-[minmax(0,1fr)] max-[700px]:gap-10">
+        <div className="min-w-0 max-[700px]:mx-auto max-[700px]:w-full max-[700px]:max-w-108">
           <ContactIllustration />
-          <div className="contact-note">
-            <span className="contact-note-icon"><Mail size={17} /></span>
+          <div className="mx-auto mt-[.7rem] flex w-fit max-w-full items-center gap-[.85rem] rounded-[.7rem] border border-line bg-[color-mix(in_srgb,var(--bg)_90%,var(--fg))] px-4 py-3">
+            <span className="grid size-[2.4rem] flex-none place-items-center rounded-[.55rem] bg-[color-mix(in_srgb,var(--accent)_13%,transparent)] text-accent"><Mail size={17} /></span>
             <div>
-              <p className="contact-note-title">Prefer email?</p>
+              <p className="mb-[.12rem] text-[.67rem] text-muted">Prefer email?</p>
               {recipient ? (
-                <a href={`mailto:${recipient}`} className="contact-email-link">{recipient} <ArrowUpRight size={14} /></a>
+                <a href={`mailto:${recipient}`} className={emailLinkClass}>{recipient} <ArrowUpRight size={14} /></a>
               ) : (
-                <span className="contact-email-link">Add your email in siteConfig.js</span>
+                <span className={emailLinkClass}>Add your email in siteConfig.js</span>
               )}
             </div>
           </div>
-          <div className="contact-socials" aria-label="Social links">
+          <div className="mt-5 flex justify-center gap-[.65rem]" aria-label="Social links">
             {socialLinks.filter((link) => link.id !== 'email').map((link) => (
               <a
                 key={link.id}
@@ -224,60 +246,63 @@ export default function Contact() {
                 {...(link.external && link.href ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 aria-label={link.label}
                 title={link.label}
-                className={`contact-social-link${link.href ? '' : ' contact-social-disabled'}`}
+                className={`${socialLinkBase}${link.href ? '' : ' cursor-default opacity-40'}`}
                 aria-disabled={!link.href || undefined}
                 onClick={!link.href ? (event) => event.preventDefault() : undefined}
               >
-                <link.Icon size={link.id === 'instagram' ? 19 : 17} className={`social-brand-icon social-brand-icon-${link.id}`} />
+                <link.Icon size={link.id === 'instagram' ? 19 : 17} className={link.id === 'instagram' ? 'stroke-[2.2] flex-none filter-[drop-shadow(0_0_.15px_currentColor)]' : undefined} />
               </a>
             ))}
           </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit} noValidate>
-          <div className="contact-field">
-            <label htmlFor="contact-name"><UserRound size={13} /> Name</label>
+        <form className="flex min-w-0 flex-col gap-[1.15rem] max-[700px]:w-full" onSubmit={handleSubmit} noValidate>
+          <div className={fieldClass}>
+            <label htmlFor="contact-name" className={labelClass}><UserRound size={13} /> Name</label>
             <input
               id="contact-name" name="name" autoComplete="name" value={form.name}
               onChange={updateField} placeholder="Your name" required maxLength={MAX_NAME}
               aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'contact-name-error' : undefined}
+              className={`${fieldControl} min-h-12`}
             />
-            {errors.name ? <p id="contact-name-error" className="contact-field-error">{errors.name}</p> : null}
+            {errors.name ? <p id="contact-name-error" className={errorClass}>{errors.name}</p> : null}
           </div>
-          <div className="contact-field">
-            <label htmlFor="contact-email"><Mail size={13} /> Email</label>
+          <div className={fieldClass}>
+            <label htmlFor="contact-email" className={labelClass}><Mail size={13} /> Email</label>
             <input
               id="contact-email" name="email" type="email" autoComplete="email" value={form.email}
               onChange={updateField} placeholder="you@example.com" required maxLength={MAX_EMAIL}
               aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? 'contact-email-error' : undefined}
+              className={`${fieldControl} min-h-12`}
             />
-            {errors.email ? <p id="contact-email-error" className="contact-field-error">{errors.email}</p> : null}
+            {errors.email ? <p id="contact-email-error" className={errorClass}>{errors.email}</p> : null}
           </div>
-          <div className="contact-field">
-            <label htmlFor="contact-message"><MessageSquare size={13} /> Message</label>
+          <div className={fieldClass}>
+            <label htmlFor="contact-message" className={labelClass}><MessageSquare size={13} /> Message</label>
             <textarea
               id="contact-message" name="message" value={form.message} onChange={updateField}
               placeholder="Tell me a little about what you have in mind..." rows={5} required maxLength={MAX_MESSAGE}
               aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? 'contact-message-error' : undefined}
+              className={`${fieldControl} min-h-36 resize-y`}
             />
-            <div className="contact-field-meta">
-              {errors.message ? <p id="contact-message-error" className="contact-field-error">{errors.message}</p> : <span />}
+            <div className="flex items-start justify-between gap-4 text-[.65rem] text-muted">
+              {errors.message ? <p id="contact-message-error" className={errorClass}>{errors.message}</p> : <span />}
               <span>{form.message.length}/{MAX_MESSAGE}</span>
             </div>
           </div>
-          <div className="contact-honeypot" aria-hidden="true">
+          <div className="absolute h-px w-px overflow-hidden whitespace-nowrap [clip-path:inset(50%)]" aria-hidden="true">
             <label htmlFor="contact-website">Leave this field empty</label>
             <input id="contact-website" name="_honey" type="text" tabIndex={-1} autoComplete="off" />
           </div>
           {status.message ? (
-            <p className={`contact-form-status contact-form-status-${status.type}`} role={status.type === 'error' ? 'alert' : 'status'}>
+            <p className={`${statusBase} ${statusStyles[status.type]}`} role={status.type === 'error' ? 'alert' : 'status'}>
               {status.message}
             </p>
           ) : null}
-          <button className="contact-submit" type="submit" disabled={isSending}>
-            <Send size={15} /> {isSending ? 'Sending…' : 'Send message'} <ArrowUpRight size={15} className="contact-submit-arrow" />
+          <button className="mt-[.15rem] inline-flex min-h-[3.1rem] items-center justify-center gap-[.65rem] rounded-[.55rem] border border-accent bg-accent px-4 py-3 text-[.82rem] font-semibold text-bg [transition:transform_160ms_ease,opacity_160ms_ease,box-shadow_160ms_ease] enabled:hover:transform-[translateY(-1px)] enabled:hover:[box-shadow:0_8px_24px_color-mix(in_srgb,var(--accent)_17%,transparent)] disabled:cursor-not-allowed disabled:opacity-45" type="submit" disabled={isSending}>
+            <Send size={15} /> {isSending ? 'Sending…' : 'Send message'} <ArrowUpRight size={15} className="ml-auto" />
           </button>
-          <p className="contact-form-hint">Your details are used only to reply to your message.</p>
+          <p className="mt-[-0.45rem] text-center text-[.66rem] text-muted">Your details are used only to reply to your message.</p>
         </form>
       </div>
     </section>
