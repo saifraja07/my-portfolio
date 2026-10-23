@@ -1,6 +1,16 @@
 import { PerspectiveCamera, Scene, WebGLRenderer } from 'three'
 import { createParticleSystem } from './particles.js'
-import { GOVERNOR, LEVELS, MIN_PARTICLES, PARTICLE_COLOR, SCENE, THEME_OPACITY, TIERS } from './config.js'
+import {
+  CURSOR,
+  GOVERNOR,
+  LEVELS,
+  MIN_PARTICLES,
+  PARTICLE_COLOR,
+  RESPECT_REDUCED_MOTION,
+  SCENE,
+  THEME_OPACITY,
+  TIERS,
+} from './config.js'
 
 const warn = (...args) => {
   if (import.meta.env.DEV) console.warn('[ThreeBackground]', ...args)
@@ -58,12 +68,8 @@ export function createBackgroundScene(container) {
 
   const scene = new Scene()
   const camera = new PerspectiveCamera(SCENE.fov, 1, 10, 2000)
-  const system = createParticleSystem({
-    color: PARTICLE_COLOR,
-    maxParticles: tier.maxParticles,
-    maxLinks: tier.maxLinks,
-  })
-  scene.add(system.lines, system.points)
+  const system = createParticleSystem({ color: PARTICLE_COLOR, maxParticles: tier.maxParticles })
+  scene.add(system.lines, system.cursorLines, system.points)
 
   // ---- state ----
   let disposed = false
@@ -82,7 +88,12 @@ export function createBackgroundScene(container) {
   let camY = 0
   let contextLost = false
   const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-  let reduceMotion = reduceQuery.matches && false;
+  let reduceMotion = RESPECT_REDUCED_MOTION && reduceQuery.matches
+  // Pointer position in canvas CSS px (the layer is fixed at the viewport's top-left).
+  const cursor = { active: false, x: 0, y: 0 }
+  let layerLeft = 0
+  let layerTop = 0
+  if (reduceMotion) warn('prefers-reduced-motion is on: the background is static. See RESPECT_REDUCED_MOTION in config.js.')
 
   function applyQuality() {
     const lv = LEVELS[level]
@@ -94,12 +105,13 @@ export function createBackgroundScene(container) {
       particles: Math.round(particles),
       links: lv.links,
       distance: Math.min(max, Math.max(min, diagonal * perDiagonal)) * (level === 0 ? 0.85 : 1),
+      radius: Math.min(CURSOR.radius.max, Math.max(CURSOR.radius.min, Math.min(width, height) * CURSOR.radius.perShortSide)),
     })
     const dpr = targetDpr()
     appliedDpr = dpr
     renderer.setPixelRatio(dpr)
     renderer.setSize(width, height, false)
-    system.setView({ cameraZ: camera.position.z, viewAspect: camera.aspect, pixelRatio: dpr })
+    system.setView({ cameraZ: camera.position.z, viewAspect: camera.aspect, pixelRatio: dpr, width, height })
   }
 
   let appliedDpr = 0
@@ -111,6 +123,8 @@ export function createBackgroundScene(container) {
     const h = Math.max(1, Math.round(rect.height))
     // Nothing to do unless the size or the pixel ratio (browser zoom, moving between screens) changed.
     if (w === width && h === height && targetDpr() === appliedDpr) return
+    layerLeft = rect.left
+    layerTop = rect.top
     width = w
     height = h
     camera.aspect = w / h
@@ -123,7 +137,7 @@ export function createBackgroundScene(container) {
 
   function applyTheme() {
     const o = THEME_OPACITY[readTheme()]
-    system.setOpacity({ pointOpacity: o.points, lineOpacity: o.lines })
+    system.setOpacity({ pointOpacity: o.points, lineOpacity: o.lines, cursorOpacity: o.cursor })
     requestStaticFrame()
   }
 
@@ -140,7 +154,7 @@ export function createBackgroundScene(container) {
   // Draw once without advancing time (used while paused for reduced motion, and after resize/theme).
   function requestStaticFrame() {
     if (raf || disposed || failed || contextLost || document.hidden) return
-    system.update(0)
+    system.update(0) // inactive cursor: a static frame never shows cursor lines
     renderFrame()
   }
 
@@ -175,7 +189,7 @@ export function createBackgroundScene(container) {
     camera.position.x = camX
     camera.position.y = camY
 
-    system.update(dt)
+    system.update(dt, camX, camY, cursor)
     renderFrame()
     if (failed) return
     govern(rawDt)
@@ -203,20 +217,26 @@ export function createBackgroundScene(container) {
 
   // ---- listeners ----
   const onPointerMove = (event) => {
-    if (reduceMotion || event.pointerType !== 'mouse') return
+    // Mouse/pen only: touch is left alone so scrolling gestures are never affected.
+    if (reduceMotion || event.pointerType === 'touch') return
+    cursor.x = event.clientX - layerLeft
+    cursor.y = event.clientY - layerTop
+    cursor.active = true
     pointerX = (event.clientX / window.innerWidth - 0.5) * 2
     pointerY = -(event.clientY / window.innerHeight - 0.5) * 2
   }
   const onPointerLeave = () => {
+    cursor.active = false // lines fade out smoothly; the stale x/y is only used for that fade
     pointerX = 0
     pointerY = 0
   }
-  const onVisibility = () => sync()
+  const onVisibility = () => {
+    if (document.hidden) onPointerLeave()
+    sync()
+  }
   const onReduceChange = (event) => {
-    reduceMotion = event.matches
-    if (reduceMotion) {
-      pointerX = pointerY = 0
-    }
+    reduceMotion = RESPECT_REDUCED_MOTION && event.matches
+    if (reduceMotion) onPointerLeave()
     sync()
   }
   const onContextLost = (event) => {
@@ -236,6 +256,7 @@ export function createBackgroundScene(container) {
   const themeObserver = new MutationObserver(applyTheme)
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
   window.addEventListener('pointermove', onPointerMove, { passive: true })
+  window.addEventListener('blur', onPointerLeave)
   document.documentElement.addEventListener('pointerleave', onPointerLeave)
   document.addEventListener('visibilitychange', onVisibility)
   reduceQuery.addEventListener('change', onReduceChange)
@@ -251,6 +272,7 @@ export function createBackgroundScene(container) {
     else window.removeEventListener('resize', resize)
     themeObserver.disconnect()
     window.removeEventListener('pointermove', onPointerMove)
+    window.removeEventListener('blur', onPointerLeave)
     document.documentElement.removeEventListener('pointerleave', onPointerLeave)
     document.removeEventListener('visibilitychange', onVisibility)
     reduceQuery.removeEventListener('change', onReduceChange)
