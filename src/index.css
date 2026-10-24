@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 
 @theme {
@@ -43,10 +44,87 @@
     background-color: var(--color-bg);
     color: var(--color-ink);
     font-family: var(--font-sans);
+=======
+@import 'tailwindcss';
+
+/* ---------- Design tokens (theme-dependent colors live here only) ---------- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b0b0c;
+  --fg: #f3f0e8;
+  --muted: #a1aab8;
+  --border: #303034;
+  --accent: #ff5148;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f6f2e9;
+  --fg: #17171a;
+  --muted: #566070;
+  --border: #d8d3c7;
+  --accent: #c8322a; /* deeper coral: 4.76:1 on --bg */
+}
+
+/* Expose tokens as Tailwind utilities: bg-bg, text-fg, text-muted, border-line, text-accent */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+  --color-accent: var(--accent);
+
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+/* Hover-capable fine pointer on a wide screen: the only place the Projects hover pop-out applies. */
+@custom-variant hoverable (@media (hover: hover) and (pointer: fine) and (min-width: 701px));
+
+/* ---------- Layout primitive ---------- */
+@utility shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: 1.25rem; /* mobile */
+  @media (width >= 40rem) {
+    padding-inline: 2rem; /* tablet */
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.25rem; /* desktop: matches the reference's 36px gutter */
+  }
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    background: var(--bg);
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* clear the sticky header on anchor jumps */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Private stacking context: the fixed particle canvas (z-index -1) sits above the body
+     background but below all page content, without touching any section's own layering. */
+  #root {
+    isolation: isolate;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    line-height: 1.7;
+>>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
     -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
+<<<<<<< HEAD
     background-color: var(--color-accent-wash);
     color: var(--color-accent);
   }
@@ -64,5 +142,53 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+=======
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+}
+
+/* ---------- Accessibility helpers ---------- */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.5rem 0.75rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.875rem;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+>>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
   }
 }

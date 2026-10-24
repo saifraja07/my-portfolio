@@ -1,9 +1,14 @@
 <!doctype html>
+<<<<<<< HEAD
 <html lang="en">
+=======
+<html lang="en" data-theme="dark">
+>>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <meta name="theme-color" content="#0a0a0b" />
     <meta
       name="description"
@@ -13,6 +18,63 @@
   </head>
   <body>
     <div id="root"></div>
+=======
+    <title>saif.dev — Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Saif Ali Raja is a MERN stack developer from India building full-stack applications, backend systems and scalable cloud infrastructure."
+    />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b0b0c" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Social preview. og:url, canonical and the image URLs are injected at build time
+         when VITE_SITE_URL is set (see vite.config.js and .env.example). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="saif.dev" />
+    <meta property="og:title" content="saif.dev — Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="I build useful things for the web. MERN stack developer from India: full-stack applications, backend systems and scalable cloud infrastructure."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="saif.dev — Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="I build useful things for the web. MERN stack developer from India: full-stack applications, backend systems and scalable cloud infrastructure."
+    />
+
+    <!-- Apply the saved (or OS-preferred) theme before first paint to avoid a flash. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme')
+          var theme =
+            saved === 'light' || saved === 'dark'
+              ? saved
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark'
+          document.documentElement.dataset.theme = theme
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute('content', theme === 'light' ? '#f6f2e9' : '#0b0b0c')
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark'
+        }
+      })()
+    </script>
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding:2rem;font-family:monospace">
+        saif.dev — Saif Ali Raja, MERN stack developer from India. This site needs JavaScript to display.
+      </p>
+    </noscript>
+>>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
