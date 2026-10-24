@@ -1,8 +1,11 @@
 // Project content lives here. Add preview images under public/projects/ and reference them as /projects/filename.webp.
-// Keep previewImage empty until you have a real screenshot; the UI will show a styled placeholder.
+// previewImage: flat screenshot used on the detail page. laptop: transparent laptop mockup used by the Projects section
+// (add the file to public/projects/ and set src plus its pixel width/height). Leave laptop out to show a styled placeholder.
 export const projects = [
   {
     id: 'browseros',
+    category: 'BROWSER-BASED OPERATING SYSTEM',
+    laptop: { src: '/projects/browseros-laptop.webp', width: 1200, height: 776 },
     title: 'BrowserOS',
     previewMark: 'browser.os',
     previewImage: '/projects/browseros.webp', // Example: '/projects/browseros.webp'
@@ -23,6 +26,8 @@ export const projects = [
   },
   {
     id: 'storageapp',
+    category: 'CLOUD STORAGE SAAS',
+    laptop: { src: '/projects/haadi-storage-laptop.webp', width: 1200, height: 745 },
     title: 'Haadi Storage',
     previewMark: 'haadi / storage',
     previewImage: '/projects/haadi-storage.webp', // Example: '/projects/haadi-storage.webp'
@@ -44,6 +49,8 @@ export const projects = [
   },
   {
     id: 'observability-stack',
+    category: 'OBSERVABILITY & INFRASTRUCTURE',
+    laptop: { src: '/projects/observability-laptop.webp', width: 1200, height: 748 },
     title: 'Observability Stack',
     previewMark: 'logs · metrics · traces',
     previewImage: '/projects/observability.webp', // Example: '/projects/observability.webp'
