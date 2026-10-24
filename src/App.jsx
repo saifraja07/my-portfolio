@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import WorkSection from "./components/WorkSection";
-import AboutSection from "./components/AboutSection";
-import SkillsSection from "./components/SkillsSection";
-import ExperienceSection from "./components/ExperienceSection";
-import ContactSection from "./components/ContactSection";
-import Footer from "./components/Footer";
-
-export default function App() {
-  return (
-    <div className="min-h-screen bg-bg text-ink">
-      <Navbar />
-      <main>
-        <Hero />
-        <WorkSection />
-        <AboutSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
-  );
-=======
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
@@ -82,5 +56,4 @@ export default function App() {
       <Routes><Route path="*" element={<RouteContent theme={theme} toggleTheme={toggleTheme} />} /></Routes>
     </>
   )
->>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
 }

@@ -1,37 +1,3 @@
-<<<<<<< HEAD
-export const projects = [
-  {
-    number: "01",
-    title: "BrowserOS",
-    description:
-      "A browser-based operating system with apps, terminal, settings, and more.",
-    tech: ["React", "Vite", "Zustand", "Tailwind CSS"],
-    liveUrl: "https://browser-os-one.vercel.app",
-    sourceUrl: "https://github.com/",
-    accent: "from-emerald-500/10",
-  },
-  {
-    number: "02",
-    title: "Haadi Storage",
-    description:
-      "A cloud storage platform for secure file upload, sharing, and management.",
-    tech: ["Node.js", "Express", "MongoDB", "AWS"],
-    liveUrl: "https://mirhaadi.in",
-    sourceUrl: "https://github.com/",
-    accent: "from-emerald-500/10",
-  },
-  {
-    number: "03",
-    title: "Purane Gaane",
-    description:
-      "A minimal retro music platform for streaming old Hindi songs.",
-    tech: ["React", "R2", "Howler.js", "Tailwind CSS"],
-    liveUrl: "https://github.com/",
-    sourceUrl: "https://github.com/",
-    accent: "from-emerald-500/10",
-  },
-];
-=======
 // Project content lives here. Add preview images under public/projects/ and reference them as /projects/filename.webp.
 // previewImage: flat screenshot used on the detail page. laptop: transparent laptop mockup used by the Projects section
 // (add the file to public/projects/ and set src plus its pixel width/height). Leave laptop out to show a styled placeholder.
@@ -105,4 +71,3 @@ export const projects = [
     sourceUrl: 'https://github.com/saifraja07/storageApp-backend',
   },
 ]
->>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee

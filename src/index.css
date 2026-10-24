@@ -1,50 +1,3 @@
-<<<<<<< HEAD
-@import "tailwindcss";
-
-@theme {
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-
-  --color-bg: #0a0a0b;
-  --color-surface: #111113;
-  --color-surface-hover: #17171a;
-  --color-border: #232327;
-  --color-border-hover: #34343a;
-  --color-ink: #f2f2f3;
-  --color-muted: #8b8b93;
-  --color-dim: #5c5c64;
-  --color-accent: #4fd18b;
-  --color-accent-dim: #35915f;
-  --color-accent-wash: #4fd18b1a;
-
-  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  --animate-blink: blink 1.1s step-end infinite;
-}
-
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: var(--color-bg);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-=======
 @import 'tailwindcss';
 
 /* ---------- Design tokens (theme-dependent colors live here only) ---------- */
@@ -119,30 +72,10 @@
     font-family: var(--font-mono);
     font-size: 1rem;
     line-height: 1.7;
->>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
     -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-<<<<<<< HEAD
-    background-color: var(--color-accent-wash);
-    color: var(--color-accent);
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-=======
     background: var(--accent);
     color: var(--bg);
   }
@@ -189,6 +122,5 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
->>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
   }
 }

@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-=======
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, loadEnv } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  // Set VITE_SITE_URL (e.g. https://saif.dev) at build time to emit canonical + absolute OG URLs.
+  // Set VITE_SITE_URL (e.g. https://saifaliraja.com) at build time to emit canonical + absolute OG URLs.
   const env = loadEnv(mode, process.cwd(), 'VITE_')
   const siteUrl = (env.VITE_SITE_URL || '').replace(/\/$/, '')
 
@@ -42,5 +34,4 @@ export default defineConfig(({ mode }) => {
       },
     ],
   }
->>>>>>> 6eaa3711bcdcf3c7b95d5a1ee15c09f0b7515fee
 })
