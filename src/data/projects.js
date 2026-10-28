@@ -68,6 +68,6 @@ export const projects = [
     challenges: 'Ensuring instrumentation loads correctly under the process manager and keeping noisy scrape endpoints out of application telemetry.',
     tech: ['Docker', 'Prometheus', 'Grafana', 'Loki', 'Alloy', 'OpenTelemetry'],
     url: '',
-    sourceUrl: 'https://github.com/saifraja07/storageApp-backend',
+    sourceUrl: 'https://github.com/saifraja07/production-observability-stack',
   },
 ]
